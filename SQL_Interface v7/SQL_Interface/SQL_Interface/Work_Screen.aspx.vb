@@ -6,6 +6,7 @@ Imports System.Collections
 Partial Class Work_Screen
     Inherits System.Web.UI.Page
 
+
     'create arraylist to keep track of the history
     Dim historyList As New List(Of String)
 
@@ -164,5 +165,10 @@ Partial Class Work_Screen
 
     Protected Sub Page_Load(sender As Object, e As System.EventArgs) Handles Me.Load
         UserIDLabel.Text = Session("username")
+        If Not Page.IsPostBack Then
+            historyList = CType(Session("myHistory"), List(Of String))
+
+        End If
+
     End Sub
 End Class

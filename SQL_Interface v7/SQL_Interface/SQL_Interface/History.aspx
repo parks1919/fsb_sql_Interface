@@ -8,16 +8,9 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>
-    <%# history1%>
-    <%# history2%>
-    <%# history3%>
-    <%# history4%>
-    <%# history5%>
-   
-
-
-
+    <div id="h" runat= "server">
+    <%#theHistory%>
+ 
         <br />
         <br />
     

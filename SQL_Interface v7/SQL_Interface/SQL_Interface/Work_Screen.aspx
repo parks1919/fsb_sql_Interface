@@ -21,19 +21,19 @@
     <div>
     
         <asp:Image ID="Image1" runat="server" Height="30px" 
-            ImageUrl="~/SQL_Interface v4/SQL_Interface/SQL_Interface/Miami.jpg" />
+            ImageUrl="~/SQL_Interface/SQL_Interface/Miami.jpg" />
     
         <span class="style1">&nbsp;Oracle&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
         <asp:Label ID="UserIDLabel" runat="server"></asp:Label>
         <br />
 &nbsp;<asp:HyperLink ID="HistoryHyperlink" runat="server" 
-            NavigateUrl="~/SQL_Interface v4/SQL_Interface/SQL_Interface/History.aspx">History</asp:HyperLink>
+            NavigateUrl="~/SQL_Interface/SQL_Interface/History.aspx">History</asp:HyperLink>
 &nbsp;&nbsp;&nbsp;
         <asp:HyperLink ID="HelpHyperlink" runat="server" 
-            NavigateUrl="~/SQL_Interface v4/SQL_Interface/SQL_Interface/Help.aspx">Help</asp:HyperLink>
+            NavigateUrl="~/SQL_Interface/SQL_Interface/Help.aspx">Help</asp:HyperLink>
 &nbsp;&nbsp;&nbsp;
         <asp:HyperLink ID="LogoutHyperlink" runat="server" 
-            NavigateUrl="~/SQL_Interface v4/SQL_Interface/SQL_Interface/Login.aspx">Logout</asp:HyperLink>
+            NavigateUrl="~/SQL_Interface/SQL_Interface/Login.aspx">Logout</asp:HyperLink>
         <br />
         <br />
         <br />

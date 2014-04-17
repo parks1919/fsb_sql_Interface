@@ -8,6 +8,12 @@
 </head>
 <body>
     <form id="form1" runat="server">
+    <p>
+ 
+        <asp:LinkButton ID="LinkButton1" runat="server" 
+            NavigateUrl="~/SQL_Interface/Work_Screen.aspx">Back to Home </asp:LinkButton>
+ 
+        </p>
     <div id="h" runat= "server">
     <%#theHistory%>
  
@@ -15,6 +21,15 @@
         <br />
     
     </div>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    <p>
+        <asp:Button ID="Button1" runat="server" Text="Delete All" />
+    </p>
     </form>
 </body>
 </html>

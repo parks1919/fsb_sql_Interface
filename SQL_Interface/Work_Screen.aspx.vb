@@ -7,7 +7,7 @@ Partial Class Work_Screen
     Inherits System.Web.UI.Page
 
 
-    'create arraylist to keep track of the history
+    'create a list to keep track of the history
     Dim historyList As New List(Of String)
 
 
@@ -24,7 +24,7 @@ Partial Class Work_Screen
             Command.CommandText = TextBox1.Text
 
             'save SQL command to history list
-            historyList.Add(Command.CommandText)
+            TryCast(Session("myHistory"), List(Of String)).Add(Command.CommandText)
             Command.Connection = Connection
             Connection.Open()
 
@@ -53,8 +53,6 @@ Partial Class Work_Screen
             GridView.Visible = False
         End Try
 
-        'pass the list(of Strings) to a session
-        Session("myHistory") = historyList
 
     End Sub
 
@@ -156,9 +154,9 @@ Partial Class Work_Screen
 
     Protected Sub Page_Load(sender As Object, e As System.EventArgs) Handles Me.Load
         UserIDLabel.Text = Session("username")
-        If Not Page.IsPostBack Then
-            historyList = CType(Session("myHistory"), List(Of String))
-
+        
+        If Session("myHistory") Is Nothing Then
+            Session("myHistory") = New List(Of String)
         End If
 
     End Sub

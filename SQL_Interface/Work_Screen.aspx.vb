@@ -135,14 +135,7 @@ Partial Class Work_Screen
         Response.End()
     End Sub
 
-    Public Shared Sub PrintHistory(ByVal historyList As ArrayList)
-        Dim query As String
 
-        For Each query In historyList
-
-        Next
-
-    End Sub
   
     Protected Sub ClearButton_Click(sender As Object, e As System.EventArgs) Handles ClearButton.Click
         TextBox1.Text = String.Empty
@@ -159,9 +152,7 @@ Partial Class Work_Screen
 
     End Sub
 
-    Protected Sub TextBox1_TextChanged(sender As Object, e As System.EventArgs) Handles TextBox1.TextChanged
-
-    End Sub
+    
 
     Protected Sub Page_Load(sender As Object, e As System.EventArgs) Handles Me.Load
         UserIDLabel.Text = Session("username")

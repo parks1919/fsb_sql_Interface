@@ -147,9 +147,26 @@ Partial Class Work_Screen
     End Sub
 
     Protected Sub SaveButton_Click(sender As Object, e As System.EventArgs) Handles SaveButton.Click
+        ' get code from textbox
+        Dim code As String
+        code = TextBox1.Text
+
+        ' send code to a txt file and save to downloads
+        Response.Clear()
+        Response.Buffer = True
+        Response.AddHeader("content-disposition", _
+             "attachment;filename=SQLCode.txt")
+        Response.Charset = ""
+        Response.ContentType = "application/txt"
+        Dim sw As New StringWriter()
+        Dim hw As New HtmlTextWriter(sw)
+
+        hw.Write(code)
+        Response.Output.Write(sw.ToString())
+        Response.Flush()
+        Response.End()
 
     End Sub
-
     
 
     Protected Sub Page_Load(sender As Object, e As System.EventArgs) Handles Me.Load

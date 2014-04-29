@@ -49,15 +49,12 @@
         <br />
         <br />
         <span class="style2">Work Screen</span><br />
-        <span class="style3"><span class="style4">File or UR</span>L:</span>
-        <asp:Button ID="FileButton" runat="server" Text="Choose File" 
-            Font-Names="Arial" style="font-family: Arial, Helvetica, sans-serif" />
-&nbsp;&nbsp;&nbsp;
-        <asp:Label ID="FileLabel" runat="server" Text="No file chosen" 
-            Font-Names="Arial" style="font-family: Arial, Helvetica, sans-serif"></asp:Label>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:Button ID="ScriptButton" runat="server" Text="LoadScript" 
-            Font-Names="Arial" style="font-family: Arial, Helvetica, sans-serif" />
+        <span class="style3"><span class="style4"> File or URL:
+        &nbsp;&nbsp;<asp:FileUpload ID="FileUpload" runat="server" />
+        &nbsp;<asp:Label ID="FileLabel" runat="server" Text="No file chosen" style="font-family: Arial, Helvetica, sans-serif"></asp:Label>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:Button ID="ScriptButton" runat="server" Text="LoadScript" style="font-family: Arial, Helvetica, sans-serif" />
+        <br />
         <br />
         <br />
         <asp:TextBox ID="TextBox1" runat="server" Height="167px" Width="529px" 

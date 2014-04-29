@@ -168,6 +168,28 @@ Partial Class Work_Screen
 
     End Sub
     
+     Protected Sub ScriptButton_Click(sender As Object, e As System.EventArgs) Handles ScriptButton.Click
+        If FileUpload.HasFile Then
+            Try
+                ' Read in the txt file
+                Dim code As String
+                Dim tr As IO.TextReader = New IO.StreamReader(FileUpload.PostedFile.InputStream)
+                code = tr.ReadToEnd
+
+                ' Set the label equal to the file name
+                FileLabel.Text = "File name: " & _
+                    FileUpload.PostedFile.FileName 
+
+                ' Set textbox equal to the content of the txt file
+                TextBox1.Text = code
+            Catch ex As Exception
+                ' Catch any excpetions thrown to the label
+                FileLabel.Text = "ERROR: " & ex.Message.ToString()
+            End Try
+        Else
+            FileLabel.Text = "You have not specified a file."
+        End If
+    End Sub
 
     Protected Sub Page_Load(sender As Object, e As System.EventArgs) Handles Me.Load
         UserIDLabel.Text = Session("username")

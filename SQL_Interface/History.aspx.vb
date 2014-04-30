@@ -1,4 +1,4 @@
-﻿
+
 Partial Class History
     Inherits System.Web.UI.Page
     'create list from Work_screen.aspx session
@@ -11,19 +11,10 @@ Partial Class History
         history = CType(Session("myHistory"), List(Of String))
 
             For Me.i = 0 To history.Count - 1
-                theHistory &= "<input type='checkbox'/>" + history.Item(i) + "<br/>"
+            theHistory &= history.Item(i) + "<br/>"
 
             Next Me.i
             h.InnerHtml = theHistory
-    End Sub
-
-    Protected Sub LinkButton1_Click(sender As Object, e As System.EventArgs) Handles LinkButton1.Click
-
-    End Sub
-
-    Protected Sub Button1_Click(sender As Object, e As System.EventArgs) Handles Button1.Click
-        history.Clear()
-        Response.Redirect(HttpContext.Current.Request.Url.ToString(), True)
     End Sub
 End Class
 

@@ -142,10 +142,6 @@ Partial Class Work_Screen
 
     End Sub
 
-    Protected Sub CancelButton_Click(sender As Object, e As System.EventArgs) Handles CancelButton.Click
-        TextBox1.Text = String.Empty
-    End Sub
-
     Protected Sub SaveButton_Click(sender As Object, e As System.EventArgs) Handles SaveButton.Click
         ' get code from textbox
         Dim code As String

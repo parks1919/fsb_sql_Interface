@@ -1,4 +1,4 @@
-﻿Imports Oracle.DataAccess.Client
+Imports Oracle.DataAccess.Client
 Imports System.Data
 Imports System.IO
 Imports System.Collections
@@ -171,10 +171,6 @@ Partial Class Work_Screen
                 Dim code As String
                 Dim tr As IO.TextReader = New IO.StreamReader(FileUpload.PostedFile.InputStream)
                 code = tr.ReadToEnd
-
-                ' Set the label equal to the file name
-                FileLabel.Text = "File name: " & _
-                    FileUpload.PostedFile.FileName 
 
                 ' Set textbox equal to the content of the txt file
                 TextBox1.Text = code

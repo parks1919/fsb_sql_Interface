@@ -51,8 +51,9 @@
         <span class="style2">Work Screen</span><br />
         <span class="style3"><span class="style4"> File or URL:
         &nbsp;&nbsp;<asp:FileUpload ID="FileUpload" runat="server" />
-        &nbsp;<asp:Label ID="FileLabel" runat="server" Text="No file chosen" style="font-family: Arial, Helvetica, sans-serif"></asp:Label>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Label ID="FileLabel" runat="server" 
+            style="font-family: Arial, Helvetica, sans-serif" ForeColor="Red"></asp:Label>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <asp:Button ID="ScriptButton" runat="server" Text="LoadScript" style="font-family: Arial, Helvetica, sans-serif" />
         <br />
         <br />

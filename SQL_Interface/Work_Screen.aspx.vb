@@ -139,6 +139,7 @@ Partial Class Work_Screen
         TextBox1.Text = String.Empty
         ErrorMessage.Text = String.Empty
         GridView.Visible = False
+        FileLabel.Visible = False
 
     End Sub
 
@@ -177,9 +178,11 @@ Partial Class Work_Screen
             Catch ex As Exception
                 ' Catch any excpetions thrown to the label
                 FileLabel.Text = "ERROR: " & ex.Message.ToString()
+                FileLabel.Visible = True
             End Try
         Else
             FileLabel.Text = "You have not specified a file."
+            FileLabel.Visible = True
         End If
     End Sub
 

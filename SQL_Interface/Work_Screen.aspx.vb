@@ -188,10 +188,46 @@ Partial Class Work_Screen
 
     Protected Sub Page_Load(sender As Object, e As System.EventArgs) Handles Me.Load
         UserIDLabel.Text = Session("username")
+        UserNameLabel.Text = getName()
         
         If Session("myHistory") Is Nothing Then
             Session("myHistory") = New List(Of String)
         End If
 
     End Sub
+End Class
+
+    Public Function getName() As String
+        'retrieves the <title> from a given Url
+        Dim request As HttpWebRequest
+        Dim response As HttpWebResponse
+        Dim header As String = "" 'returned <h1>
+        Dim HTML As String = "" 'html returned from web request
+        Dim TempArray As Array 'array used to strip out the <h1>
+        Dim Temp As String = ""
+        Dim DelimiterA() As String = {"<h1>"}
+        Dim DelimiterB() As String = {"</h1>"}
+
+        Try
+            request = HttpWebRequest.Create("http://netapps.miamioh.edu/directory/?searchstring=" & Session("username"))
+            request.Method = WebRequestMethods.Http.Get
+            response = request.GetResponse
+            Dim streamreader As New StreamReader(response.GetResponseStream())
+            HTML = streamreader.ReadToEnd
+            response.Close()
+
+            If HTML <> "" Then
+                If (InStr(HTML, "<h1>") > 0) And (InStr(HTML, "</h1>") > 0) Then
+                    TempArray = HTML.Split(DelimiterA, StringSplitOptions.None)
+                    Temp = TempArray(1)
+                    TempArray = Temp.Split(DelimiterB, StringSplitOptions.None)
+                    header = TempArray(0)
+                End If
+            End If
+        Catch ex As Exception
+            header = ""
+        End Try
+
+        Return header
+    End Function
 End Class

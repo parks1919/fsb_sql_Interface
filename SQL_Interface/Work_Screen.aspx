@@ -45,6 +45,8 @@
         <asp:HyperLink ID="LogoutHyperlink" runat="server" 
             NavigateUrl="~/SQL_Interface/Login.aspx" 
             style="font-family: Arial, Helvetica, sans-serif">Logout</asp:HyperLink>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:Label ID="UserNameLabel" runat="server" style="font-family: Arial, Helvetica, Sans-Serif"></asp:Label>
         <br />
         <br />
         <br />

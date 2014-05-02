@@ -2,20 +2,22 @@ Imports Oracle.DataAccess.Client
 Imports System.Data
 Imports System.IO
 Imports System.Collections
+Imports System.Net
 
 Partial Class Work_Screen
     Inherits System.Web.UI.Page
-
 
     'create a list to keep track of the history
     Dim historyList As New List(Of String)
 
 
     Protected Sub ExecuteButton_Click(sender As Object, e As System.EventArgs) Handles ExecuteButton.Click
+        Dim timeout As Boolean = checkTimeout()
+
         'Clear current error message
         ErrorMessage.Text = String.Empty
         Try
-           
+
             ' Attempts to connect to the database
             Dim Connection As New OracleConnection
             Connection.ConnectionString = "Data Source = SBA; user id = " + Session("username") + "; password = " + Session("password")
@@ -43,6 +45,16 @@ Partial Class Work_Screen
                     Me.ErrorMessage.Text = "Error attempting to insert duplicate data."
                 Case 12560
                     Me.ErrorMessage.Text = "The database is unavailable."
+                Case 1017
+                    Me.ErrorMessage.Text = "Your session has expired."
+                    Server.Transfer("Login.aspx", True)
+                    Session.Clear()
+                Case 942
+                    Me.ErrorMessage.Text = "A table or view does not exist.  Check your spelling."
+                Case 918
+                    Me.ErrorMessage.Text = "A column is ambiguously defined. Add identifier before the column name."
+                Case 900
+                    Me.ErrorMessage.Text = "Invalid SQL Statement. Check spelling of 'SELECT', 'FROM', and 'WHERE'"
                 Case Else
                     Me.ErrorMessage.Text = "Database error: " + ex.Message.ToString()
             End Select
@@ -85,6 +97,16 @@ Partial Class Work_Screen
                     Me.ErrorMessage.Text = "Error attempting to insert duplicate data."
                 Case 12560
                     Me.ErrorMessage.Text = "The database is unavailable."
+                Case 1017
+                    Me.ErrorMessage.Text = "Your session has expired."
+                    Server.Transfer("Login.aspx", True)
+                    Session.Clear()
+                Case 942
+                    Me.ErrorMessage.Text = "A table or view does not exist.  Check your spelling."
+                Case 918
+                    Me.ErrorMessage.Text = "A column is ambiguously defined. Add identifier before the column name."
+                Case 900
+                    Me.ErrorMessage.Text = "Invalid SQL Statement. Check spelling of 'SELECT', 'FROM', and 'WHERE'"
                 Case Else
                     Me.ErrorMessage.Text = "Database error: " + ex.Message.ToString()
             End Select
@@ -101,6 +123,8 @@ Partial Class Work_Screen
 
     Protected Sub ExportButton_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles ExportButton.Click
         'Get the data from database into datatable
+
+        Dim timeout As Boolean = checkTimeout()
 
         Dim dt As DataTable = GetData()
 
@@ -134,8 +158,10 @@ Partial Class Work_Screen
     End Sub
 
 
-  
+
     Protected Sub ClearButton_Click(sender As Object, e As System.EventArgs) Handles ClearButton.Click
+        Dim timeout As Boolean = checkTimeout()
+
         TextBox1.Text = String.Empty
         ErrorMessage.Text = String.Empty
         GridView.Visible = False
@@ -144,6 +170,8 @@ Partial Class Work_Screen
     End Sub
 
     Protected Sub SaveButton_Click(sender As Object, e As System.EventArgs) Handles SaveButton.Click
+        Dim timeout As Boolean = checkTimeout()
+
         ' get code from textbox
         Dim code As String
         code = TextBox1.Text
@@ -164,8 +192,10 @@ Partial Class Work_Screen
         Response.End()
 
     End Sub
-    
-     Protected Sub ScriptButton_Click(sender As Object, e As System.EventArgs) Handles ScriptButton.Click
+
+    Protected Sub ScriptButton_Click(sender As Object, e As System.EventArgs) Handles ScriptButton.Click
+        Dim timeout As Boolean = checkTimeout()
+
         If FileUpload.HasFile Then
             Try
                 ' Read in the txt file
@@ -189,13 +219,14 @@ Partial Class Work_Screen
     Protected Sub Page_Load(sender As Object, e As System.EventArgs) Handles Me.Load
         UserIDLabel.Text = Session("username")
         UserNameLabel.Text = getName()
-        
+
+        Session("timeout") = False
+
         If Session("myHistory") Is Nothing Then
             Session("myHistory") = New List(Of String)
         End If
 
     End Sub
-End Class
 
     Public Function getName() As String
         'retrieves the <title> from a given Url
@@ -229,5 +260,28 @@ End Class
         End Try
 
         Return header
+    End Function
+
+    Public Function checkTimeout() As Boolean
+
+        Dim start As Date = Session("sessionStart")
+
+        Dim difference As Double = (DateTime.Now() - start).TotalMinutes
+
+        UserNameLabel.Text = difference
+
+        If (difference > 20) Then
+            MsgBox("Your session has ended and you will be redirected to the login page, save all data.")
+            Session("timeout") = True
+        ElseIf (difference > 18) Then
+            MsgBox("Your session will timeout in 1 minutes and you will be redirected to the login page, save all data.")
+            Session("timeout") = False
+        ElseIf (difference > 17) Then
+            MsgBox("Your session will timeout in 2 minutes and you will be redirected to the login page, save all data.")
+            Session("timeout") = False
+        Else
+            Return False
+        End If
+
     End Function
 End Class

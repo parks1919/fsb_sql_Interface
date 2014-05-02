@@ -24,6 +24,8 @@ Partial Class Login
                 Connection.Open()
                 Connection.Close()
 
+                Session("sessionStart") = DateTime.Now()
+
                 Server.Transfer("Work_Screen.aspx", True)
 
             Catch ex As OracleException
@@ -45,5 +47,8 @@ Partial Class Login
         End If
     End Sub
 
+    Protected Sub Page_Load(sender As Object, e As System.EventArgs) Handles Me.Load
+        Session.Clear()
+    End Sub
 End Class
 

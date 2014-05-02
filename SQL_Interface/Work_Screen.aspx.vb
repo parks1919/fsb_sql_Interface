@@ -2,6 +2,7 @@ Imports Oracle.DataAccess.Client
 Imports System.Data
 Imports System.IO
 Imports System.Collections
+Imports System.Net
 
 Partial Class Work_Screen
     Inherits System.Web.UI.Page
@@ -213,7 +214,6 @@ Partial Class Work_Screen
         End If
 
     End Sub
-End Class
 
     Public Function getName() As String
         'retrieves the <title> from a given Url

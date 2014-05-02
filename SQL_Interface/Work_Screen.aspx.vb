@@ -43,6 +43,15 @@ Partial Class Work_Screen
                     Me.ErrorMessage.Text = "Error attempting to insert duplicate data."
                 Case 12560
                     Me.ErrorMessage.Text = "The database is unavailable."
+                Case 1017
+                    Me.ErrorMessage.Text = "Your session has expired."
+                    Server.Transfer("Login.apsx", False)
+                Case 942
+                    Me.ErrorMessage.Text = "A table or view does not exist.  Check your spelling."
+                Case 918
+                    Me.ErrorMessage.Text = "A column is ambiguously defined. Add identifier before the column name."
+                Case 900
+                    Me.ErrorMessage.Text = "Invalid SQL Statement. Check spelling of 'SELECT', 'FROM', and 'WHERE'"
                 Case Else
                     Me.ErrorMessage.Text = "Database error: " + ex.Message.ToString()
             End Select
@@ -85,6 +94,15 @@ Partial Class Work_Screen
                     Me.ErrorMessage.Text = "Error attempting to insert duplicate data."
                 Case 12560
                     Me.ErrorMessage.Text = "The database is unavailable."
+                Case 1017
+                    Me.ErrorMesage.Text = "Your session has expired."
+                    Server.Transfer("Login.apsx", False)
+                Case 942
+                    Me.ErrorMessage.Text = "A table or view does not exist.  Check your spelling."
+                Case 918
+                    Me.ErrorMessage.Text = "A column is ambiguously defined. Add identifier before the column name."
+                Case 900
+                    Me.ErrorMessage.Text = "Invalid SQL Statement. Check spelling of 'SELECT', 'FROM', and 'WHERE'"
                 Case Else
                     Me.ErrorMessage.Text = "Database error: " + ex.Message.ToString()
             End Select

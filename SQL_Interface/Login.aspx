@@ -28,7 +28,7 @@
         <span class="style1"><span class="style3">&nbsp;Oracle</span><br />
         <br />
         </span>
-        <asp:HyperLink ID="HelpHyperlink" runat="server" NavigateUrl="~/Help.aspx">Help</asp:HyperLink>
+        <asp:HyperLink ID="HelpHyperlink" runat="server" NavigateUrl="~/SQL_Interface/LoginHelp.aspx">Help</asp:HyperLink>
         <br />
         <br />
         <span class="style2">Login</span><br />

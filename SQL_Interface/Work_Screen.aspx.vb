@@ -47,8 +47,12 @@ Partial Class Work_Screen
                     Me.ErrorMessage.Text = "The database is unavailable."
                 Case 1017
                     Me.ErrorMessage.Text = "Your session has expired."
+<<<<<<< HEAD
                     Server.Transfer("Login.aspx", True)
                     Session.Clear()
+=======
+                    Server.Transfer("Login.apsx", False)
+>>>>>>> FETCH_HEAD
                 Case 942
                     Me.ErrorMessage.Text = "A table or view does not exist.  Check your spelling."
                 Case 918
@@ -98,9 +102,14 @@ Partial Class Work_Screen
                 Case 12560
                     Me.ErrorMessage.Text = "The database is unavailable."
                 Case 1017
+<<<<<<< HEAD
                     Me.ErrorMessage.Text = "Your session has expired."
                     Server.Transfer("Login.aspx", True)
                     Session.Clear()
+=======
+                    Me.ErrorMesage.Text = "Your session has expired."
+                    Server.Transfer("Login.apsx", False)
+>>>>>>> FETCH_HEAD
                 Case 942
                     Me.ErrorMessage.Text = "A table or view does not exist.  Check your spelling."
                 Case 918

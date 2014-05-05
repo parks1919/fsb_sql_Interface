@@ -89,6 +89,7 @@
             <HeaderStyle BackColor="#FFAEAE" />
         </asp:GridView>
         <br />
+        <asp:Label ID="SuccessLabel" runat="server" Text="Success" Visible="False"></asp:Label>
         <br />
     
     </div>

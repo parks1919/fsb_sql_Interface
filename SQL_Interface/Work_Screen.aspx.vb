@@ -13,6 +13,9 @@ Partial Class Work_Screen
 
     Protected Sub ExecuteButton_Click(sender As Object, e As System.EventArgs) Handles ExecuteButton.Click
         checkTimeout()
+        GridView.DataSource = Nothing
+        GridView.DataBind()
+        RecordCountLabel.Text = ""
 
         'Clear current error message
         ErrorMessage.Text = String.Empty
@@ -43,7 +46,6 @@ Partial Class Work_Screen
             End If
 
             Connection.Close()
-            GridView.Visible = True
             SuccessLabel.Visible = True
         Catch ex As OracleException
             ' Catches all oracle exceptions and attempts to make common ones user-friendly
@@ -65,13 +67,15 @@ Partial Class Work_Screen
                 Case Else
                     Me.ErrorMessage.Text = "Database error: " + ex.Message.ToString()
             End Select
-            GridView.Visible = False
+            GridView.DataSource = Nothing
+            GridView.DataBind()
             RecordCountLabel.Visible = False
             SuccessLabel.Visible = False
         Catch ex As Exception
             ' Catches all other exceptions
             Me.ErrorMessage.Text = (ex.Message.ToString())
-            GridView.Visible = False
+            GridView.DataSource = Nothing
+            GridView.DataBind()
             RecordCountLabel.Visible = False
             SuccessLabel.Visible = False
         End Try
@@ -178,6 +182,7 @@ Partial Class Work_Screen
         GridView.Visible = False
         FileLabel.Visible = False
         RecordCountLabel.Visible = False
+        SuccessLabel.Visible = False
 
     End Sub
 

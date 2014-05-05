@@ -8,13 +8,13 @@
     <style type="text/css">
         .style1
         {}
-        .style2
-        {
-            font-size: large;
-        }
         .style3
         {
             font-size: xx-large;
+        }
+        .style4
+        {
+            font-family: Arial, Helvetica, sans-serif;
         }
     </style>
 </head>
@@ -25,13 +25,14 @@
         <asp:Image ID="Image1" runat="server" Height="30px" 
             ImageUrl="~/SQL_Interface/Miami.jpg" />
     
-        <span class="style1"><span class="style3">&nbsp;Oracle</span><br />
+        <span class="style1"><span class="style3">&nbsp;<span class="style4">Oracle - 
+        Login</span></span><br />
         <br />
         </span>
-        <asp:HyperLink ID="HelpHyperlink" runat="server" NavigateUrl="~/SQL_Interface/LoginHelp.aspx">Help</asp:HyperLink>
-        <br />
-        <br />
-        <span class="style2">Login</span><br />
+        <asp:HyperLink ID="HelpHyperlink" runat="server" 
+            NavigateUrl="~/SQL_Interface/LoginHelp.aspx" CssClass="style4" 
+            style="font-size: medium">Help</asp:HyperLink>
+        <br class="style4" />
         <br />
         <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

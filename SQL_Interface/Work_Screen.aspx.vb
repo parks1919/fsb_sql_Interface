@@ -34,7 +34,14 @@ Partial Class Work_Screen
             If Reader.HasRows Then
                 GridView.DataSource = Reader
                 GridView.DataBind()
+
+                Dim recordcount As Integer
+                recordcount = GridView.Rows.Count
+                RecordCountLabel.Text() = "Number of Records: " & recordcount
+                RecordCountLabel.Visible = True
+
             End If
+
 
             Connection.Close()
             GridView.Visible = True
@@ -47,12 +54,8 @@ Partial Class Work_Screen
                     Me.ErrorMessage.Text = "The database is unavailable."
                 Case 1017
                     Me.ErrorMessage.Text = "Your session has expired."
-<<<<<<< HEAD
                     Server.Transfer("Login.aspx", True)
                     Session.Clear()
-=======
-                    Server.Transfer("Login.apsx", False)
->>>>>>> FETCH_HEAD
                 Case 942
                     Me.ErrorMessage.Text = "A table or view does not exist.  Check your spelling."
                 Case 918
@@ -63,10 +66,12 @@ Partial Class Work_Screen
                     Me.ErrorMessage.Text = "Database error: " + ex.Message.ToString()
             End Select
             GridView.Visible = False
+            RecordCountLabel.Visible = False
         Catch ex As Exception
             ' Catches all other exceptions
             Me.ErrorMessage.Text = (ex.Message.ToString())
             GridView.Visible = False
+            RecordCountLabel.Visible = False
         End Try
 
 
@@ -102,14 +107,9 @@ Partial Class Work_Screen
                 Case 12560
                     Me.ErrorMessage.Text = "The database is unavailable."
                 Case 1017
-<<<<<<< HEAD
                     Me.ErrorMessage.Text = "Your session has expired."
                     Server.Transfer("Login.aspx", True)
                     Session.Clear()
-=======
-                    Me.ErrorMesage.Text = "Your session has expired."
-                    Server.Transfer("Login.apsx", False)
->>>>>>> FETCH_HEAD
                 Case 942
                     Me.ErrorMessage.Text = "A table or view does not exist.  Check your spelling."
                 Case 918
@@ -175,6 +175,7 @@ Partial Class Work_Screen
         ErrorMessage.Text = String.Empty
         GridView.Visible = False
         FileLabel.Visible = False
+        RecordCountLabel.Visible = False
 
     End Sub
 
@@ -277,11 +278,10 @@ Partial Class Work_Screen
 
         Dim difference As Double = (DateTime.Now() - start).TotalMinutes
 
-        UserNameLabel.Text = difference
-
         If (difference > 20) Then
             MsgBox("Your session has ended and you will be redirected to the login page, save all data.")
             Session("timeout") = True
+            Server.Transfer("Login.aspx")
         ElseIf (difference > 18) Then
             MsgBox("Your session will timeout in 1 minutes and you will be redirected to the login page, save all data.")
             Session("timeout") = False

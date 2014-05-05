@@ -33,7 +33,7 @@
         <asp:Image ID="Image1" runat="server" Height="30px" 
             ImageUrl="~/SQL_Interface/Miami.jpg" />
     
-        <span class="style1">&nbsp;<span class="style3">Oracle&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
+        <span class="style1"><span class="style3">Oracle&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
         <asp:Label ID="UserIDLabel" runat="server" 
             style="font-family: Arial, Helvetica, sans-serif"></asp:Label>
         <br />
@@ -46,7 +46,7 @@
         <asp:HyperLink ID="LogoutHyperlink" runat="server" 
             NavigateUrl="~/SQL_Interface/Login.aspx" 
             style="font-family: Arial, Helvetica, sans-serif">Logout</asp:HyperLink>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <asp:Label ID="UserNameLabel" runat="server" style="font-family: Arial, Helvetica, Sans-Serif"></asp:Label>
         <br />
         <br />
@@ -76,6 +76,8 @@
         <asp:Button ID="ClearButton" runat="server" Text="Clear" CssClass="style3" />
 &nbsp;&nbsp;&nbsp;
         <br />
+        <br />
+        <asp:Label ID="RecordCountLabel" runat="server"></asp:Label>
         <br />
         <asp:Label ID="ErrorMessage" runat="server" ForeColor="Red" Font-Names="Arial"></asp:Label>
         <br />

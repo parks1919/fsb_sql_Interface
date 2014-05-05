@@ -42,9 +42,9 @@ Partial Class Work_Screen
 
             End If
 
-
             Connection.Close()
             GridView.Visible = True
+            SuccessLabel.Visible = True
         Catch ex As OracleException
             ' Catches all oracle exceptions and attempts to make common ones user-friendly
             Select Case ex.Number
@@ -67,11 +67,13 @@ Partial Class Work_Screen
             End Select
             GridView.Visible = False
             RecordCountLabel.Visible = False
+            SuccessLabel.Visible = False
         Catch ex As Exception
             ' Catches all other exceptions
             Me.ErrorMessage.Text = (ex.Message.ToString())
             GridView.Visible = False
             RecordCountLabel.Visible = False
+            SuccessLabel.Visible = False
         End Try
 
 

@@ -211,17 +211,34 @@ Partial Class Work_Screen
     End Sub
 
     Protected Sub ScriptButton_Click(sender As Object, e As System.EventArgs) Handles ScriptButton.Click
-        checkTimeout()
+        Dim timeout As Boolean = checkTimeout()
+        Dim filetype As String() = {"txt", "html"}
+        Dim ext As String = System.IO.Path.GetExtension(FileUpload.PostedFile.FileName)
+        Dim isvalidfile As Boolean = False
 
         If FileUpload.HasFile Then
             Try
-                ' Read in the txt file
-                Dim code As String
-                Dim tr As IO.TextReader = New IO.StreamReader(FileUpload.PostedFile.InputStream)
-                code = tr.ReadToEnd
+                For i As Integer = 0 To filetype.Length - 1
+                    If ext = "." & filetype(i) Then
+                        isvalidfile = True
+                        Exit For
+                    End If
+                Next
+                If Not isvalidfile Then
+                    FileLabel.Visible = True
+                    FileLabel.Text = "Invalid file, please upload a txt or html file"
+                End If
+                If isvalidfile = True Then
+                    ' Read in the txt file
+                    Dim code As String
+                    Dim tr As IO.TextReader = New IO.StreamReader(FileUpload.PostedFile.InputStream)
+                    code = tr.ReadToEnd
 
-                ' Set textbox equal to the content of the txt file
-                TextBox1.Text = code
+                    ' Set textbox equal to the content of the txt file
+                    TextBox1.Text = code
+                    FileLabel.Visible = False
+                End If
+
             Catch ex As Exception
                 ' Catch any excpetions thrown to the label
                 FileLabel.Text = "ERROR: " & ex.Message.ToString()
@@ -232,7 +249,6 @@ Partial Class Work_Screen
             FileLabel.Visible = True
         End If
     End Sub
-
     Protected Sub Page_Load(sender As Object, e As System.EventArgs) Handles Me.Load
         UserIDLabel.Text = Session("username")
         UserNameLabel.Text = getName()

@@ -12,7 +12,7 @@ Partial Class Work_Screen
 
 
     Protected Sub ExecuteButton_Click(sender As Object, e As System.EventArgs) Handles ExecuteButton.Click
-        Dim timeout As Boolean = checkTimeout()
+        checkTimeout()
 
         'Clear current error message
         ErrorMessage.Text = String.Empty
@@ -133,7 +133,7 @@ Partial Class Work_Screen
     Protected Sub ExportButton_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles ExportButton.Click
         'Get the data from database into datatable
 
-        Dim timeout As Boolean = checkTimeout()
+        checkTimeout()
 
         Dim dt As DataTable = GetData()
 
@@ -169,7 +169,7 @@ Partial Class Work_Screen
 
 
     Protected Sub ClearButton_Click(sender As Object, e As System.EventArgs) Handles ClearButton.Click
-        Dim timeout As Boolean = checkTimeout()
+        checkTimeout()
 
         TextBox1.Text = String.Empty
         ErrorMessage.Text = String.Empty
@@ -180,7 +180,7 @@ Partial Class Work_Screen
     End Sub
 
     Protected Sub SaveButton_Click(sender As Object, e As System.EventArgs) Handles SaveButton.Click
-        Dim timeout As Boolean = checkTimeout()
+        checkTimeout()
 
         ' get code from textbox
         Dim code As String
@@ -204,34 +204,17 @@ Partial Class Work_Screen
     End Sub
 
     Protected Sub ScriptButton_Click(sender As Object, e As System.EventArgs) Handles ScriptButton.Click
-        Dim timeout As Boolean = checkTimeout()
-        Dim filetype As String() = {"txt", "html"}
-        Dim ext As String = System.IO.Path.GetExtension(FileUpload.PostedFile.FileName)
-        Dim isvalidfile As Boolean = False
+        checkTimeout()
 
         If FileUpload.HasFile Then
             Try
-                For i As Integer = 0 To filetype.Length - 1
-                    If ext = "." & filetype(i) Then
-                        isvalidfile = True
-                        Exit For
-                    End If
-                Next
-                If Not isvalidfile Then
-                    FileLabel.Visible = True
-                    FileLabel.Text = "Invalid file, please upload a txt or html file"
-                End If
-                If isvalidfile = True Then
-                    ' Read in the txt file
-                    Dim code As String
-                    Dim tr As IO.TextReader = New IO.StreamReader(FileUpload.PostedFile.InputStream)
-                    code = tr.ReadToEnd
+                ' Read in the txt file
+                Dim code As String
+                Dim tr As IO.TextReader = New IO.StreamReader(FileUpload.PostedFile.InputStream)
+                code = tr.ReadToEnd
 
-                    ' Set textbox equal to the content of the txt file
-                    TextBox1.Text = code
-                    FileLabel.Visible = False
-                End If
-
+                ' Set textbox equal to the content of the txt file
+                TextBox1.Text = code
             Catch ex As Exception
                 ' Catch any excpetions thrown to the label
                 FileLabel.Text = "ERROR: " & ex.Message.ToString()
@@ -289,24 +272,19 @@ Partial Class Work_Screen
         Return header
     End Function
 
-    Public Function checkTimeout() As Boolean
+    Public Function checkTimeout() As Double
 
         Dim start As Date = Session("sessionStart")
 
         Dim difference As Double = (DateTime.Now() - start).TotalMinutes
 
-        If (difference > 20) Then
-            MsgBox("Your session has ended and you will be redirected to the login page, save all data.")
-            Session("timeout") = True
+        If (difference > 1) Then
+            ScriptManager.RegisterStartupScript(Me, [GetType](), "showalert", "alert('Your session has ended and you will be redirected to the login page, save all data.');", True)
             Server.Transfer("Login.aspx")
-        ElseIf (difference > 18) Then
-            MsgBox("Your session will timeout in 1 minutes and you will be redirected to the login page, save all data.")
-            Session("timeout") = False
+        ElseIf (difference > 0.5) Then
+            ScriptManager.RegisterStartupScript(Me, [GetType](), "showalert", "alert('Your session will timeout in 1 minutes and you will be redirected to the login page, save all data.');", True)
         ElseIf (difference > 17) Then
-            MsgBox("Your session will timeout in 2 minutes and you will be redirected to the login page, save all data.")
-            Session("timeout") = False
-        Else
-            Return False
+            ScriptManager.RegisterStartupScript(Me, [GetType](), "showalert", "alert('Your session will timeout in 2 minutes and you will be redirected to the login page, save all data.');", True)
         End If
 
     End Function

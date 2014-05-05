@@ -275,19 +275,29 @@ Partial Class Work_Screen
     End Function
 
     Public Function checkTimeout() As Double
-
         Dim start As Date = Session("sessionStart")
 
         Dim difference As Double = (DateTime.Now() - start).TotalMinutes
 
-        If (difference > 1) Then
-            ScriptManager.RegisterStartupScript(Me, [GetType](), "showalert", "alert('Your session has ended and you will be redirected to the login page, save all data.');", True)
+        If (difference > 2) Then
+            ScriptManager.RegisterStartupScript(Me, [GetType](), "showalert", "alert('Your session is ending and you will be redirected to the login page.  Save all data');", True)
             Server.Transfer("Login.aspx")
-        ElseIf (difference > 0.5) Then
-            ScriptManager.RegisterStartupScript(Me, [GetType](), "showalert", "alert('Your session will timeout in 1 minutes and you will be redirected to the login page, save all data.');", True)
-        ElseIf (difference > 17) Then
-            ScriptManager.RegisterStartupScript(Me, [GetType](), "showalert", "alert('Your session will timeout in 2 minutes and you will be redirected to the login page, save all data.');", True)
-        End If
 
+        ElseIf (difference > 1) Then
+            ScriptManager.RegisterStartupScript(Me, [GetType](), "showalert", "alert('Your session will end in less than 1 minutes and you will be redirected to the login page.  Save all data');", True)
+
+        ElseIf (difference > 18) Then
+            ScriptManager.RegisterStartupScript(Me, [GetType](), "showalert", "alert('Your session will end in less than 2 minutes and you will be redirected to the login page.  Save all data');", True)
+
+        ElseIf (difference > 17) Then
+            ScriptManager.RegisterStartupScript(Me, [GetType](), "showalert", "alert('Your session will end in less than 3 minutes and you will be redirected to the login page.  Save all data');", True)
+
+        ElseIf (difference > 16) Then
+            ScriptManager.RegisterStartupScript(Me, [GetType](), "showalert", "alert('Your session will end in less than 4 minutes and you will be redirected to the login page.  Save all data');", True)
+
+        ElseIf (difference > 15) Then
+            ScriptManager.RegisterStartupScript(Me, [GetType](), "showalert", "alert('Your session will end in less than 5 minutes and you will be redirected to the login page.  Save all data');", True)
+
+        End If
     End Function
 End Class

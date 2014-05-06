@@ -85,8 +85,8 @@
         <asp:GridView ID="GridView" runat="server" BackColor="White" 
             BorderColor="Black" BorderStyle="Solid" BorderWidth="2px" 
             ForeColor="Black" style="font-family: Arial, Helvetica, sans-serif">
-            <AlternatingRowStyle BackColor="#FFAEAE" />
-            <HeaderStyle BackColor="#FFAEAE" />
+            <AlternatingRowStyle BackColor="#FFE6E6" />
+            <HeaderStyle BackColor="#FFE6E6" />
         </asp:GridView>
         <br />
         <asp:Label ID="SuccessLabel" runat="server" Text="Success" Visible="False"></asp:Label>

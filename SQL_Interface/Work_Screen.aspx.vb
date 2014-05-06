@@ -53,6 +53,7 @@ Partial Class Work_Screen
                 If Reader.HasRows Then
                     GridView.DataSource = Reader
                     GridView.DataBind()
+                    GridView.Visible = True
 
                     Dim recordcount As Integer
                     recordcount = GridView.Rows.Count

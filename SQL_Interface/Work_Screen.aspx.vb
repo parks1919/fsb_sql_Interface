@@ -9,6 +9,7 @@ Partial Class Work_Screen
 
     'create a list to keep track of the history
     Dim historyList As New List(Of String)
+    Dim queriesList As New List(Of String)
 
 
     Protected Sub ExecuteButton_Click(sender As Object, e As System.EventArgs) Handles ExecuteButton.Click
@@ -25,27 +26,44 @@ Partial Class Work_Screen
             Dim Connection As New OracleConnection
             Connection.ConnectionString = "Data Source = SBA; user id = " + Session("username") + "; password = " + Session("password")
 
-            Dim Command As New OracleCommand
-            Command.CommandText = TextBox1.Text
+            'split commandText into multiple queries
+            If (TextBox1.Text.Contains(";")) Then
+                Dim queries As String() = TextBox1.Text.Split(New Char() {";"c})
+                Dim query As String
 
-            'save SQL command to history list
-            TryCast(Session("myHistory"), List(Of String)).Add(Command.CommandText)
-            Command.Connection = Connection
-            Connection.Open()
-
-            Dim Reader As OracleDataReader = Command.ExecuteReader
-            If Reader.HasRows Then
-                GridView.DataSource = Reader
-                GridView.DataBind()
-
-                Dim recordcount As Integer
-                recordcount = GridView.Rows.Count
-                RecordCountLabel.Text() = "Number of Records: " & recordcount
-                RecordCountLabel.Visible = True
+                For Each query In queries
+                    queriesList.Add(query)
+                Next
+            Else
+                queriesList.Add(TextBox1.Text)
 
             End If
 
-            Connection.Close()
+            'traverse the string array and execute individual queries
+            For i As Integer = 0 To queriesList.Count() - 1
+
+                Dim Command As New OracleCommand
+                Command.CommandText = queriesList(i)
+
+                TryCast(Session("myHistory"), List(Of String)).Add(Command.CommandText)
+                Command.Connection = Connection
+                Connection.Open()
+
+                Dim Reader As OracleDataReader = Command.ExecuteReader
+                If Reader.HasRows Then
+                    GridView.DataSource = Reader
+                    GridView.DataBind()
+
+                    Dim recordcount As Integer
+                    recordcount = GridView.Rows.Count
+                    RecordCountLabel.Text() = "Number of Records: " & recordcount
+                    RecordCountLabel.Visible = True
+
+                End If
+
+                Connection.Close()
+            Next
+
             SuccessLabel.Visible = True
         Catch ex As OracleException
             ' Catches all oracle exceptions and attempts to make common ones user-friendly
@@ -73,12 +91,17 @@ Partial Class Work_Screen
             SuccessLabel.Visible = False
         Catch ex As Exception
             ' Catches all other exceptions
-            Me.ErrorMessage.Text = (ex.Message.ToString())
+            If (ex.Message.ToString() = "OracleCommand.CommandText is invalid") Then
+                Me.ErrorMessage.Text = "Invalid character. Try removing the final selection"
+            Else
+                Me.ErrorMessage.Text = (ex.Message.ToString())
+            End If
             GridView.DataSource = Nothing
             GridView.DataBind()
             RecordCountLabel.Visible = False
             SuccessLabel.Visible = False
         End Try
+
 
 
     End Sub
@@ -300,11 +323,11 @@ Partial Class Work_Screen
 
         Dim difference As Double = (DateTime.Now() - start).TotalMinutes
 
-        If (difference > 2) Then
+        If (difference > 20) Then
             ScriptManager.RegisterStartupScript(Me, [GetType](), "showalert", "alert('Your session is ending and you will be redirected to the login page.  Save all data');", True)
             Server.Transfer("Login.aspx")
 
-        ElseIf (difference > 1) Then
+        ElseIf (difference > 19) Then
             ScriptManager.RegisterStartupScript(Me, [GetType](), "showalert", "alert('Your session will end in less than 1 minutes and you will be redirected to the login page.  Save all data');", True)
 
         ElseIf (difference > 18) Then
